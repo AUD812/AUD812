@@ -1,22 +1,63 @@
 
+
+
 a = ".()+@&* asdf asdf asdf asdf 123 123 123";
 
-b = [1, 2, 3, 4, 5];
+
+t = "Kalimera mera mera    m";
+
+
+t[0];
+
+t[0].ascii;
+
+t[0].ascii.midicps;
+
+
+(freq: t[0].ascii.midicps).play;
+(midinote: t[0].ascii + 2).play;
+//:
+// note: using dictionaries ....
+u = (\K: 0, \a: 1, \l: 2, \i: 6, \m: 3, \e: 4, \r: 5, ' ': -5);
+
+//:
+{
+	(t.reverse ++ t ++ t.reverse ++ t[3..6]) do: { | letter |
+		(degree: u[letter.asSymbol], dur: 0.1).play;
+		0.15.wait;
+	}
+	
+}.fork;
+
+
 //:
 
+
+
+b = [1, 2, 3, 4, 5];
+
+://:
+(
 a;
 
 b;
 
+)
 //:
-
+(
 a[0];
 
 a[1];
-//:
-a.size;
 
+
+
+)
+//:
+(
+a.size;
+)
 //: ================================================================
+(
 // ITERATION
 // variants of iteration:
 // n do : do something n times
@@ -30,18 +71,24 @@ a.size;
 // detect: find first element for which something is true
 // reject: select elements for which something is FALSE
 
+)
 //:+
+(
 a do: { | s, i |
 	[i, s, s.ascii, s.ascii.midicps].postln;
 	0.1.wait;
 };
+)
 //:+
+(
 a do: { | s, i |
 	[i, s, s.ascii, s.ascii.midicps].postln;
 	(dur: 0.1, freq: s.ascii.midicps).play;
 	0.1.wait;
 };
+)
 //:
+(
 f = {
 	{ 
 		a do: { | s, i |
@@ -51,7 +98,9 @@ f = {
 		};
 	}.fork;
 };
+)
 //:
+(
 f = { | dt = 0.1,  df = 1 | 
 	{ 
 		a do: { | s, i |
@@ -61,22 +110,29 @@ f = { | dt = 0.1,  df = 1 |
 		};
 	}.fork;
 };
+)
 //:
-
+(
 g = { | from = 0 |
 	a[from..];
 };
+)
 //:
+(
 h = { | from = 0, size = 2 |
 	a[from..from + size];
 };
+)
 //:
+(
 h.value(size: 5);
+)
 //:
+(
 g.(20);
-
+)
 //:
-
+(
 //:
 i = { | dt = 0.1,  df = 1, from = 0 size = 10, times = 1 | 
 	{
@@ -89,15 +145,21 @@ i = { | dt = 0.1,  df = 1, from = 0 size = 10, times = 1 |
 		}
 	}.fork;
 };
+)
 //:
+(
 i.value;
+)
 //:
+(
 i.(times: 5);
+)
 //:
+(
 i.(size: 5, df: 1.5, times: 3);
-
-
+)
 //:using streams as arguments
+(
 // now we can customize sequences of values in an argument
 j = { | dt = 0.1,  df = 1, from = 0 size = 10, times = 1 |
 	dt = dt.asStream; // make sure that we have streams
@@ -118,21 +180,37 @@ j = { | dt = 0.1,  df = 1, from = 0 size = 10, times = 1 |
 		}
 	}.fork;
 };
+)
 //:
+(
 j.value;
+)
 //:
+(
 j.(dt: Pseq([1, 1, 2, 1, 3, 1, 2, 1, 5, 5, 5] / 10, inf));
+)
 //:
+(
 f
+)
 //:
+(
 f.value;
+)
 //:
+(
 f.value(0.2);
+)
 //:
+(
 f.value(0.15, 0.9);
+)
 //:
+(
 f.value(df: 1.5); // change df only !!!
+)
 //:
+(
 {
 	f.value; // original melody;
 	1.wait;
@@ -140,8 +218,9 @@ f.value(df: 1.5); // change df only !!!
 	1.wait;
 	f.(0.1*2/3, 10/9); // melody 2/3 speed, higher by 10/9
 }.fork;
+)
 //:
-
+(
 a isKindOf: String;
 
 a isKindOf: Array;
@@ -159,5 +238,75 @@ ArrayedCollection.dumpSubclassList;
 SequenceableCollection.dumpSubclassList;
 
 b.class;
+// changing an array by putting an element in it:
+)
+//: (substituting an value in a position)
+(
+a = a.copy;
+)
+//:
+(
+a.put(0, $A);
+)
+//:
+(
+a.put(1, $B);
+)
+//:
+(
+a
+)
+//:
+(
+a = a.reverse;
+)
+//:
+(
+// ================
 
-
+// Dictionaries;
+// ================
+x = (
+	freq: 440,
+	duration: 1
+);
+)
+//:
+(
+x[\duration]
+)
+//:
+(
+x[\freq];
+)
+//:
+(
+x;
+)
+//:
+(
+x[\age] = 5;
+)
+//:
+(
+x.put(\name, "boulis");
+)
+//:
+(
+x;
+)
+//:
+(
+y = ();
+)
+//:
+(
+y.size;
+)
+//:
+(
+x.size;
+)
+//:
+(
+Collection.dumpSubclassList;
