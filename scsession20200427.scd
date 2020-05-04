@@ -1,7 +1,7 @@
 
 
 
-a = ".()+@&* asdf asdf asdf asdf 123 123 123";
+a =  ".()+@&* asdf asdf asdf asdf 123 123 123";
 
 
 t = "Kalimera mera mera    m";
