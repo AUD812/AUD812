@@ -8,7 +8,9 @@ This is *italics*, this is **bold**
 
 Quoting the above to show it as code:
 
-``` *italics*, **bold**
+``` 
+*italics*, **bold**
+```
 
 The end.
 
